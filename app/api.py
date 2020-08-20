@@ -11,7 +11,7 @@ def get_data(server, path, auth_token):
     items = []
     
     
-    def requester():
+    def requester(url):
 
         try:
 
@@ -34,20 +34,26 @@ def get_data(server, path, auth_token):
         except requests.exceptions.HTTPError as err:
                 print ("Error in connection --> "+str(err)) 
     
-    json_response = requester()
-    items = json_response["items"] #Elementos obtenidos de response
-    paging = json_response["paging"] #Datos de paging de objetos
-    count = (paging["offset"] + paging["limit"]) #Objetos por paging
+    json_response = requester(url)
+    while True:
 
-    print("\n")
-    progress = Bar('Charging '+ items[0]["type"]+ ' Objects:', max=paging["limit"])
-    for item in items:
-        if item['type'] == 'AccessPolicy':   
-            elements.append({ 'type': item['type'] , 'name': item['name'], 'id': item['id'] })
+        items = json_response["items"] #Elementos obtenidos de response
+        paging = json_response["paging"] #Datos de paging de objetos
+        progress = Bar('Charging '+ items[0]["type"]+ ' Objects:', max=paging["limit"])
+        for item in items:
+            if item['type'] == 'AccessPolicy':   
+                elements.append({ 'type': item['type'] , 'name': item['name'], 'id': item['id'] })
+            else:
+                elements.append(item)
+            progress.next()
+        progress.finish()
+
+        if "next" in paging:
+            url = paging["next"][0]
+            json_response = requester(url)
         else:
-            elements.append(item)
-        progress.next()
-    progress.finish()
+            print(len(elements))
+            break
 
     return elements
 
