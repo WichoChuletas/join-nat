@@ -178,7 +178,7 @@ def generate_csv(nat_policy):
         }
         csv_nat_policy.append(row)
     nat_policy_dataframe = pd.DataFrame(csv_nat_policy)
-    nat_policy_dataframe.to_csv('policies.csv')
+    nat_policy_dataframe.to_csv('app\\temp\\nat\\csv\\policies.csv')
 
 def get_value(name):
     with open('app\\temp\\nat\\json\\fmc\\networks.json', "r+") as json_file:
@@ -190,7 +190,7 @@ def get_value(name):
                 return network["value"]
 
 def search_value_objects():
-    csvfile = pd.read_csv('policies.csv', encoding='utf-8')
+    csvfile = pd.read_csv('app\\temp\\nat\\csv\\policies.csv', encoding='utf-8')
     nat_policy = []
     for row in csvfile.itertuples():    
         rule = {
@@ -202,4 +202,4 @@ def search_value_objects():
         print(rule)
         nat_policy.append(rule)
     nat_policy_dataframe = pd.DataFrame(nat_policy)
-    nat_policy_dataframe.to_csv('policies_nat_values.csv')
+    nat_policy_dataframe.to_csv('app\\temp\\nat\\csv\\policies_nat_values.csv')

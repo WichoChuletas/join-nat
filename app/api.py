@@ -1,4 +1,5 @@
 import requests, json, re
+import pandas as pd
 from progress.bar import Bar, ChargingBar
 
 
@@ -95,3 +96,13 @@ def cleanhtml(raw_html):
     cleanr = re.compile('<.*?>')
     cleantext = re.sub(cleanr, '', raw_html)
     return cleantext
+
+def search_value_nat(ipv4):
+    csvfile = pd.read_csv('app\\temp\\nat\\csv\\policies_nat_values.csv', encoding='utf-8')
+    for row in csvfile.itertuples():
+        if row[2] == ipv4 or row[3] == ipv4 or row[4] == ipv4 or row[5] == ipv4:
+            print("originalSource:", row[2], "\n", "originalDestination:", row[3],"\n" ,"translatedSource:", row[4], "\n", "translatedDestination:", row[5], "\n")
+        #elif '.'.join((str(row[2]).split('.')[:3])) == '.'.join(ipv4.split('.')[:3]) or '.'.join((str(row[3]).split('.')[:3])) == '.'.join(ipv4.split('.')[:3]) or '.'.join((str(row[4]).split('.')[:3])) == '.'.join(ipv4.split('.')[:3]) or '.'.join((str(row[5]).split('.')[:3])) == '.'.join(ipv4.split('.')[:3]):
+            #print("originalSource:", row[2], "\n", "originalDestination:", row[3],"\n" ,"translatedSource:", row[4], "\n", "translatedDestination:", row[5], "\n")
+        #elif '.'.join((str(row[2]).split('.')[:2])) == '.'.join(ipv4.split('.')[:2]) or '.'.join((str(row[3]).split('.')[:2])) == '.'.join(ipv4.split('.')[:2]) or '.'.join((str(row[4]).split('.')[:2])) == '.'.join(ipv4.split('.')[:2]) or '.'.join((str(row[5]).split('.')[:2])) == '.'.join(ipv4.split('.')[:2]):
+            #print("originalSource:", row[2], "\n", "originalDestination:", row[3],"\n" ,"translatedSource:", row[4], "\n", "translatedDestination:", row[5], "\n")         
