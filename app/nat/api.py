@@ -2,17 +2,17 @@ import json
 import pandas as pd
 from app.api import get_data, post_data
 
-nat_path = '/api/fmc_config/v1/domain/b9ec7a85-8030-0f91-2518-000000000000/policy/ftdnatpolicies?limit=1000&expanded=true'
+nat_path = '/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/ftdnatpolicies?limit=1000&expanded=true'
 
-all_nat_rules_path = '/api/fmc_config/v1/domain/b9ec7a85-8030-0f91-2518-000000000000/policy/ftdnatpolicies/{}/natrules?limit=1000&expanded=true'
+all_nat_rules_path = '/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/ftdnatpolicies/{}/natrules?limit=1000&expanded=true'
 
-auto_nat_rules_path = '/api​/fmc_config​/v1​/domain​/b9ec7a85-8030-0f91-2518-000000000000/policy​/ftdnatpolicies​/{}​/autonatrules?limit=1000&expanded=true'
+auto_nat_rules_path = '/api​/fmc_config​/v1​/domain​/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy​/ftdnatpolicies​/{}​/autonatrules?limit=1000&expanded=true'
 manual_nat_rules_path = '/api​/fmc_config​/v1​/domain​/b9ec7a85-8030-0f91-2518-000000000000​/policy​/ftdnatpolicies​/{}​/manualnatrules​?limit=1000&expanded=true' 
 
-manual_nat_rules_path_post = '/api/fmc_config/v1/domain/b9ec7a85-8030-0f91-2518-000000000000/policy/ftdnatpolicies/{}/manualnatrules'
+manual_nat_rules_path_post = '/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/ftdnatpolicies/{}/manualnatrules'
 #manual_nat_rules_path = '/api​/fmc_config​/v1​/domain​/b9ec7a85-8030-0f91-2518-000000000000​/policy​/ftdnatpolicies​/{}​/manualnatrules​?limit=1000&expanded=true'  
 
-network_objects_path = '/api/fmc_config/v1/domain/b9ec7a85-8030-0f91-2518-000000000000/object/networkaddresses?limit=1000&expanded=true'
+network_objects_path = '/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses?limit=1000&expanded=true'
 
 acp_fmc_json_directory = 'app\\temp\\nat\\json\\fmc\\' 
 nat_post_json_directory = 'app\\temp\\nat\\json\\post\\'
@@ -194,7 +194,7 @@ def search_value_objects():
     nat_policy = []
     for row in csvfile.itertuples():    
         rule = {
-            'originalSource': get_value(row[2]) if row[2]!='Any' else 'Any',
+            'originalSource': get_val ue(row[2]) if row[2]!='Any' else 'Any',
             'originalDestination': get_value(row[3]) if row[3]!='Any'  else 'Any',
             'translatedSource': get_value(row[4]) if row[4]!='Any' else 'Any',
             'translatedDestination': get_value(row[5])if row[5]!='Any' else 'Any' 
