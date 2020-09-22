@@ -194,7 +194,7 @@ def search_value_objects():
     nat_policy = []
     for row in csvfile.itertuples():    
         rule = {
-            'originalSource': get_val ue(row[2]) if row[2]!='Any' else 'Any',
+            'originalSource': get_value(row[2]) if row[2]!='Any' else 'Any',
             'originalDestination': get_value(row[3]) if row[3]!='Any'  else 'Any',
             'translatedSource': get_value(row[4]) if row[4]!='Any' else 'Any',
             'translatedDestination': get_value(row[5])if row[5]!='Any' else 'Any' 
